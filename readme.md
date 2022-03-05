@@ -1,4 +1,4 @@
-# API para salvar usuários
+# API com CRUD de usuários integrado ao Postgresql
 
 Projeto Pessoal para aperfeiçoamento das tecnologias utilizadas
 
