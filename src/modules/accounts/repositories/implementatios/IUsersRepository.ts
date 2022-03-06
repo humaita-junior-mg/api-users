@@ -8,5 +8,6 @@ export interface IUsersRepository{
     findByEmail(email: string): Promise<User>
     deleteUser(user: User): Promise<void>
     list(): Promise<User[]>
-
+    turnAdmin(user: User): Promise<User>
+    editUserPassword(user: User, password: string): Promise<User>
 }

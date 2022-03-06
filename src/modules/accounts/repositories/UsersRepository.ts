@@ -44,4 +44,23 @@ export class UsersRepository implements IUsersRepository{
 
     }
 
+    async turnAdmin(user: User): Promise<User>{
+
+       await this.repository.update({id: user.id}, {isAdmin: true})
+
+       const id = user.id
+
+       return this.repository.findOne({id})
+    }
+
+    async editUserPassword(user: User, password: string): Promise<User> {
+        
+        const id = user.id
+
+        await this.repository.update({id: user.id}, {password: password})
+
+        return await this.repository.findOne({id})
+
+    }
+
 }
