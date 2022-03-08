@@ -14,9 +14,9 @@ export class EditUserPasswordUseCase{
         private usersRepository: IUsersRepository
     ){}
 
-    async execute(email: string, password: string): Promise<User>{
+    async execute(user_id: string, password: string): Promise<User>{
 
-        const search = await this.usersRepository.findByEmail(email)
+        const search = await this.usersRepository.findById(user_id)
 
         if(!search){
             throw new Error("User do not exists!")

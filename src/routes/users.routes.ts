@@ -1,4 +1,6 @@
 import { Router } from "express" 
+import { ensureAdminAuthenticated } from "../middlewares/ensureAdminAuthenticated"
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated"
 import { CreateUserController } from "../modules/accounts/useCases/createUser/CreateUserController"
 import { DeleteUserController } from "../modules/accounts/useCases/deleteUser/DeleteUserController"
 import { EditUserPasswordController } from "../modules/accounts/useCases/editUser/EditUserPasswordController"
@@ -13,14 +15,21 @@ const listUsersController = new ListUsersController()
 const turnAdminController = new TurnAdminController()
 const editUserPasswordController = new EditUserPasswordController()
 
-router.get("/", listUsersController.handle)
+
 
 router.post("/create", createUserController.handle)
 
-router.put("/password", editUserPasswordController.handle)
+//other users
+router.use(ensureAuthenticated)
+router.patch("/password", editUserPasswordController.handle)
 
-router.patch("/turnadmin", turnAdminController.handle)
-
+//admin
+router.use(ensureAdminAuthenticated)
+router.get("/", listUsersController.handle)
+router.patch("/admin", turnAdminController.handle)
 router.delete("/delete", deleteUserController.handle)
+
+
+
 
 export { router }

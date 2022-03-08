@@ -7,13 +7,14 @@ export class EditUserPasswordController{
 
     async handle(request: Request, response: Response): Promise<Response>{
 
-        const { email, newPassword } = request.body;
+        const { newPassword } = request.body;
+        const { id } = request.user;
 
         const editUserPasswordUseCase = container.resolve(EditUserPasswordUseCase)
 
         try {
             
-            const user = await editUserPasswordUseCase.execute(email, newPassword)
+            const user = await editUserPasswordUseCase.execute(id, newPassword)
 
             return response.status(200).json(user)
 

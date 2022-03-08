@@ -32,6 +32,13 @@ export class UsersRepository implements IUsersRepository{
 
     }
 
+    async findById(id: string): Promise<User> {
+
+        const user = await this.repository.findOne({id})
+
+        return user
+    }
+
     async deleteUser(user: User): Promise<void> {
         
         await this.repository.delete(user.id)
