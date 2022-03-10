@@ -19,3 +19,5 @@ Projeto em Node.Js, utilizando:
 - bcrypt
 - Docker
 
+Obs: Para inicializar o Docker pela primeira vez, rode o comando `docker-compose up`, a partir da segunda vez, basta utilizar o `docker-compose start` 
+
