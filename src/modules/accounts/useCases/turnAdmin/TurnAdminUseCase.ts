@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppError";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/implementatios/IUsersRepository";
 
@@ -15,7 +16,7 @@ export class TurnAdminUseCase{
         const search = await this.usersRepository.findByEmail(email)
 
         if(!search){
-            throw new Error("User do not exists!")
+            throw new AppError("User do not exists!", 401)
         }
 
         const user = await this.usersRepository.turnAdmin(search)

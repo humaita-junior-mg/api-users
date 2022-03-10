@@ -11,18 +11,11 @@ export class TurnAdminController{
         const { email } = request.body;
 
         const turnAdminUseCase = container.resolve(TurnAdminUseCase)
+         
+        const turnAdmin = await turnAdminUseCase.execute(email)
 
-        try {
-            
-            const turnAdmin = await turnAdminUseCase.execute(email)
-
-            return response.status(200).json({user: turnAdmin})
-
-        } catch (error) {
-            
-            return response.status(200).json({error: error.message})
-
-        }
+        return response.status(200).json({user: turnAdmin})
+        
     }
 
 }

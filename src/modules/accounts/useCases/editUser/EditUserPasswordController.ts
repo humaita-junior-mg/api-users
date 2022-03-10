@@ -11,19 +11,11 @@ export class EditUserPasswordController{
         const { id } = request.user;
 
         const editUserPasswordUseCase = container.resolve(EditUserPasswordUseCase)
+           
+        const user = await editUserPasswordUseCase.execute(id, newPassword)
 
-        try {
-            
-            const user = await editUserPasswordUseCase.execute(id, newPassword)
-
-            return response.status(200).json(user)
-
-        } catch (error) {
-            
-            return response.status(400).json({error: error.message})
-
-        }
-
+        return response.status(200).json(user)
+        
     }    
 
 }

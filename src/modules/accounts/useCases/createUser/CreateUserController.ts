@@ -12,18 +12,11 @@ export class CreateUserController {
         const { name, email, password} = request.body;
 
         const createUserUseCase = container.resolve(CreateUserUseCase)
+           
+        await createUserUseCase.execute({name, email, password})
 
-        try {
+        return response.status(201).send()
             
-            await createUserUseCase.execute({name, email, password})
-
-            return response.status(201).send()
-            
-        } catch (error) {
-            
-            return response.status(400).json({error: error.message})
-
-        }
 
     }
 

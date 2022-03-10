@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/implementatios/IUsersRepository";
 import { hash } from "bcryptjs"
+import { AppError } from "../../../../errors/AppError";
 
 
 
@@ -19,7 +20,7 @@ export class EditUserPasswordUseCase{
         const search = await this.usersRepository.findById(user_id)
 
         if(!search){
-            throw new Error("User do not exists!")
+            throw new AppError("User do not exists!")
         }
 
         const passwordHash = await hash(password, 10)

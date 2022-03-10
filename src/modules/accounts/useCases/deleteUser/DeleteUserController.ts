@@ -12,18 +12,10 @@ export class DeleteUserController{
 
         const deleteUserUseCase = container.resolve(DeleteUserUseCase)
 
-        try {
-            
-            await deleteUserUseCase.execute(email)
+        await deleteUserUseCase.execute(email)
 
-            return response.status(200).send()
-
-        } catch (error) {
-            
-            return response.status(400).json({error: error.message})
-            
-        }
-
+        return response.status(200).send()
+        
     }
 
 }

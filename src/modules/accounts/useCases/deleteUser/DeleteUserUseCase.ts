@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppError";
 import { IUsersRepository } from "../../repositories/implementatios/IUsersRepository";
 
 
@@ -18,7 +19,7 @@ export class DeleteUserUseCase{
         const search = await this.usersRepository.findByEmail(email)
 
         if(!search){
-            throw new Error("User do not exists")
+            throw new AppError("User do not exists")
         }
 
         await this.usersRepository.deleteUser(search)
